@@ -16,5 +16,25 @@ export default function Home() {
   const onClick = (id) => {
     router.push(`/person/${id}`);
   };
-  return null;
+  return (
+    <section>
+      {people.length === 0
+        ? "Loading..!!"
+        : people.map((person) => (
+            <article key={person.id} className="container">
+              <img src={person.squareImage} />
+              <div>{person.id}</div>
+            </article>
+          ))}
+      <style jsx>{`
+        section {
+          padding: 50px 0px;
+          display: grid;
+          gap: 20px;
+          grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        }
+        }
+      `}</style>
+    </section>
+  );
 }
