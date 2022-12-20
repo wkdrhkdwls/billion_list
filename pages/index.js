@@ -13,7 +13,7 @@ export default function Home() {
     getPeople();
   }, []);
   const router = useRouter();
-  const onClick = (id) => {
+  const onPersonClick = (id) => {
     router.push(`/person/${id}`);
   };
   return (
@@ -22,17 +22,32 @@ export default function Home() {
         ? "Loading..!!"
         : people.map((person) => (
             <article key={person.id} className="container">
-              <img src={person.squareImage} />
-              <div>{person.id}</div>
+              <img
+                src={person.squareImage}
+                onClick={() => onPersonClick(person.id)}
+                alt="zero"
+              />
+              <div>
+                <h2>{person.id}</h2>
+              </div>
+              <h4>{Math.round(person.netWorth / 1000)} billions</h4>
+              <h4>{person.industries}</h4>
             </article>
           ))}
       <style jsx>{`
         section {
-          padding: 50px 0px;
+          background-color: gray;
+          padding: 50px 10px;
           display: grid;
-          gap: 20px;
-          grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+          gap: 50px;
+          grid-template-columns: repeat(3, 1fr);
         }
+        img {
+          width: 80%;
+          cursor: pointer;
+        }
+        h2 {
+          font-size: 50px;
         }
       `}</style>
     </section>
